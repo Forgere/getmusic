@@ -2,6 +2,7 @@ const assert = require('assert');
 const fs = require('fs')
 const path = require('path')
 const getmusic = require('../index')
+const cp = require('child_process')
 
 const your_donwload_path = path.join(__dirname, "./down")
 
@@ -34,3 +35,8 @@ describe('Functions', function () {
         });
     });
 });
+
+
+const files = path.join(__dirname, "./down/*")
+
+cp.exec(`rm -rf ${files}`, () => {})
