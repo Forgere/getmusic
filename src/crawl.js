@@ -105,7 +105,6 @@ const crawl = {
     },
 
     downMp3: function(url, name, dest = "/Users/ali/Downloads" ){
-        console.log('下MP3')
         return new Promise( (resolve, reject) => {
             const location = dest+'/' + name +'.mp3'
             request({url}).pipe(fs.createWriteStream(location))

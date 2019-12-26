@@ -1,10 +1,11 @@
 {
   "name": "getmusic",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "get music",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "start": "node index.js"
   },
   "author": "",
   "repository": {
@@ -13,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2"
   }
 }
