@@ -20,7 +20,8 @@ function parseJson(str){
 }
 
 const crawl = {
-    down: function (target,save, filter="") {
+
+    getSource: function (target, filter="") {
         this.target = target
         return new Promise((resolve, reject) => {
             var options = { method: 'POST',
@@ -35,11 +36,10 @@ const crawl = {
                     //模拟下载第一个
                     try {
                         if (filter) {
-                            await crawl.downAll(result.filter(val => val.artist.toString().includes('隔壁老樊'))[0], save)
+                            resolve(result.filter(val => val.artist.toString().includes(filter))[0])
                         } else {
-                            await crawl.downAll(result[0], save)
+                            resolve(result[0])
                         }
-                        resolve("download success!!")   
                     } catch (error) {
                         reject(error)  
                     }
@@ -49,7 +49,32 @@ const crawl = {
         })
     },
 
-    downAll: function(source, save){
+    downlyric: function(target, filter="") {
+        return new Promise( async (resolve, reject) => {
+            try {
+                const source = await crawl.getSource(target, filter)
+                const lyric = await crawl.downLRC(source)
+                resolve(lyric)   
+            } catch (error) {
+                reject(error)  
+            }
+        })
+    },
+
+    down: function (target,save, filter="") {
+        this.target = target
+        return new Promise( async (resolve, reject) => {
+            try {
+                const source = await crawl.getSource(target, filter)
+                await crawl.downSource(source, save)
+                resolve("download success!!")   
+            } catch (error) {
+                reject(error)  
+            }
+        })
+    },
+
+    downSource: function(source, save){
         this.originSource = source
         return new Promise( async (resolve, reject) => {
             const mp3 = await crawl.getMP3Url(source.url_id, source.source)
@@ -132,9 +157,7 @@ const crawl = {
                         } else {
                             reject("没有歌词")
                         }
-                        
                     }
-                    
                 })
             } else {
                 reject('error')

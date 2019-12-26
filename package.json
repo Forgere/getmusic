@@ -1,6 +1,6 @@
 {
   "name": "getmusic",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "get music",
   "main": "index.js",
   "scripts": {

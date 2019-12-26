@@ -37,12 +37,8 @@ const getmusic =  {
         return crawl.down(source, save, filter)
     },
 
-    add: function(){
-        console.log('add')
-    },
-
-    show: function(){
-        console.log('show')
+    downloadLyric: function(source, filter=""){
+        return crawl.downlyric(source, filter)
     }
 }
 
