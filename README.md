@@ -1,6 +1,6 @@
 # getmusic
 
-just a node package for downloading music
+just a node package for downloading music and lyric
 
 1. ```npm install getmusic```
 
