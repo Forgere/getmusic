@@ -1,5 +1,11 @@
 const getmusic = require('getmusic')
 
-getmusic.download('说好不哭', "/Users/ali/Downloads").then(()=>{
+const your_donwload_path = "/Users/forgere/Downloads"
+
+getmusic.download('我曾', your_donwload_path).then(()=>{
     //do something
 })
+
+getmusic.downloadFilter('我曾', your_donwload_path, "隔壁老樊").then(() => {
+    //do something
+}).catch(err => console.log(err))

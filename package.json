@@ -1,7 +1,7 @@
 {
-  "name": "getmuisc",
-  "version": "1.0.1",
-  "description": "get muisc",
+  "name": "getmusic",
+  "version": "1.0.2",
+  "description": "get music",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

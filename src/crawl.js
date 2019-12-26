@@ -20,7 +20,7 @@ function parseJson(str){
 }
 
 const crawl = {
-    down: function (target,save) {
+    down: function (target,save, filter="") {
         this.target = target
         return new Promise((resolve, reject) => {
             var options = { method: 'POST',
@@ -33,8 +33,16 @@ const crawl = {
                 } else {
                     var result = parseJson(body)
                     //模拟下载第一个
-                    await crawl.downAll(result[0], save)
-                    resolve(result)
+                    try {
+                        if (filter) {
+                            await crawl.downAll(result.filter(val => val.artist.toString().includes('隔壁老樊'))[0], save)
+                        } else {
+                            await crawl.downAll(result[0], save)
+                        }
+                        resolve("download success!!")   
+                    } catch (error) {
+                        reject(error)  
+                    }
                 }                
             });
             
@@ -43,15 +51,16 @@ const crawl = {
 
     downAll: function(source, save){
         this.originSource = source
-        return new Promise( async (resolve) => {
+        return new Promise( async (resolve, reject) => {
             const mp3 = await crawl.getMP3Url(source.url_id, source.source)
-            await crawl.downMp3(mp3, source.name, save)
-            // await crawl.downImg(source.pic_id)
-            var result = {
-                mes: 'success',
-                code: 200,
-            }
-            resolve(result)
+            await crawl.downMp3(mp3, source.name, save).then(() => {
+                // await crawl.downImg(source.pic_id)
+                var result = {
+                    mes: 'success',
+                    code: 200,
+                }
+                resolve(result)
+            }).catch((error) => reject(error))
         })
     },
 

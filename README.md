@@ -8,7 +8,15 @@ just a node package for downloading music
     ```
     const getmusic = require('getmusic')
 
-    getmusic.download('说好不哭', "/Users/ali/Downloads").then(()=>{
+    getmusic.download('我曾', your_donwload_path).then(()=>{
         //do something
     })
+    ```
+    
+3. get music filter by singer
+
+    ```
+    getmusic.downloadFilter('我曾', your_donwload_path, "隔壁老樊").then(() => {
+        //do something
+    }).catch(err => console.log(err))
     ```

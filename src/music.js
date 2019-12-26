@@ -33,6 +33,10 @@ const getmusic =  {
         return crawl.down(source, save)
     },
 
+    downloadFilter: function(source, save, filter){
+        return crawl.down(source, save, filter)
+    },
+
     add: function(){
         console.log('add')
     },
